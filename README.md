@@ -5,6 +5,7 @@ Shows how Renovate sends its own Maven requests to a public mirror of Maven Cent
 Pull requests of renovatebot/renovate:
 
 1. [#47690](https://github.com/renovatebot/renovate/pull/47690): the `urlReplacements` option
+2. `public` and `fallback` (see below)
 
 ## Config
 
@@ -37,3 +38,18 @@ Expected:
 - The update to `junit:junit` 4.13.2 is the same as without the option.
 
 On `main` the option is unknown and all requests go to `repo.maven.apache.org`.
+
+## Fallback
+
+[`config-fallback.js`](./config-fallback.js) points the rule at a mirror which can't be reached (`https://mirror.invalid/maven2/`) and sets `fallback: true`.
+Check out the PR branch `viceice/feat/url-replacements-public-fallback` and run:
+
+```sh
+RENOVATE_CONFIG_FILE=config-fallback.js LOG_LEVEL=debug node <renovate>/lib/renovate.ts
+```
+
+Expected:
+
+- `DEBUG: urlReplacements: replacement for https://repo.maven.apache.org/maven2/junit/junit/maven-metadata.xml failed (…), falling back to the original URL`
+- the same update to `junit:junit` 4.13.2
+- `HTTP statistics` lists both `mirror.invalid` and `repo.maven.apache.org`
