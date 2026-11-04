@@ -5,7 +5,8 @@ Shows how Renovate sends its own Maven requests to a public mirror of Maven Cent
 Pull requests of renovatebot/renovate:
 
 1. [#47690](https://github.com/renovatebot/renovate/pull/47690): the `urlReplacements` option
-2. `public` and `fallback` (see below)
+2. [#47735](https://github.com/renovatebot/renovate/pull/47735): `public` and `fallback` (see [Fallback](#fallback))
+3. [#47736](https://github.com/renovatebot/renovate/pull/47736): pass rules to child processes (no reproduction here)
 
 ## Config
 
